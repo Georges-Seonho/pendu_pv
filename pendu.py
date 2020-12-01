@@ -11,13 +11,30 @@ word = selectWordToGuess()
 hiddenWord = createHiddenWord(word)
 guessedLetter = []
 
+# game starts here
 getPlayerScore(player)
 
-print(hiddenWord)
+while guesses > 0:
+        currentResult, currentLetter, updatedHiddenWord = getLetter(word, hiddenWord)
+        try:
+            if currentResult == 'False': 
+                guesses -= 1
+                if currentLetter not in guessedLetter and currentLetter.isalpha(): 
+                    guessedLetter.append(currentLetter)
+                print('Nop, you loose one chance.')
 
-# while len(guessedLetter) <= 8:
-#         if hiddenWord == word:
-#             print('you won!!')
-#             break
+            else:
+                guesses -= 1
+                guessedLetter.append(currentLetter)
+                hiddenWord = updatedHiddenWord
 
-print('Guesses left: ' + str(guesses))
+            if hiddenWord == word:
+                print('you won!!')
+                break
+                
+        finally:
+            print('Secret word: ' + hiddenWord)
+            print( 'You tried the letters : ' + ', '.join(guessedLetter))
+            print('Guesses left: ' + str(guesses))
+
+

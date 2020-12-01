@@ -19,7 +19,21 @@ def createHiddenWord(word):
         result += '*'
     return result
     
-# def testLetter(letter):
+def getLetter(word, hiddenWord):
+    letter = input('Enter a letter:')
+    secret = ''
+    i = -1
+    if letter in word and len(letter) == 1 and letter.isalpha(): 
+        for char in word:
+            i += 1
+            if char == letter:
+                secret += letter
+            elif hiddenWord[i] != '*':
+                secret += hiddenWord[i]
+            else:
+                secret += '*'
+        return 'True', letter, secret
+    return 'False', letter, hiddenWord
     
 # def testWord(word):
 
